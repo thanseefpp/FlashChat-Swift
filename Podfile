@@ -5,4 +5,5 @@ target 'Flash Chat iOS13' do
   pod 'CLTypingLabel'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'lottie-ios'
 end
