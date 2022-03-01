@@ -49,6 +49,8 @@ class ChatViewController: UIViewController {
                             self.message.append(newMessages)
                             DispatchQueue.main.async {
                                 self.tableView.reloadData() // to reload the table view datas
+                                let indexPath = IndexPath(row: self.message.count - 1 , section: 0) // no section so put 0
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)// to enable animation change to true.
                             }
                         }
                     }
@@ -71,6 +73,9 @@ class ChatViewController: UIViewController {
                     print("There is some issue found \(e)")
                 }
                 else{
+                    DispatchQueue.main.async {
+                        self.messageTextfield.text = ""
+                    }
                     print("Successfully completed posting data")
                 }
             }
@@ -99,8 +104,23 @@ extension ChatViewController : UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let message = message[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
-        cell.textLabel?.text = message[indexPath.row].body
+        cell.label.text = message.body
+        
+        //checking the user is same or not
+        if message.sender == Auth.auth().currentUser?.email {
+            cell.leftImageView.isHidden = true
+            cell.rightImageView.isHidden = false
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.lightPurple)
+            cell.label.textColor = UIColor(named: K.BrandColors.purple)
+        }else{
+            cell.leftImageView.isHidden = false
+            cell.rightImageView.isHidden = true
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.purple)
+            cell.label.textColor = UIColor(named: K.BrandColors.lightPurple)
+        }
         return cell
     }
     

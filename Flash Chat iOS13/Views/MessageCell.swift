@@ -14,6 +14,8 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var messageBubble: UIView!
     @IBOutlet weak var rightImageView: UIImageView!
     @IBOutlet weak var label: UILabel!
+    
+    @IBOutlet var leftImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // bubble corner radius changing.

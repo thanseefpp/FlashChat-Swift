@@ -6,4 +6,5 @@ target 'Flash Chat iOS13' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'lottie-ios'
+  pod 'IQKeyboardManagerSwift'
 end
